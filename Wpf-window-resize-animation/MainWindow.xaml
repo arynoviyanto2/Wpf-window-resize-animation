@@ -4,9 +4,40 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Wpf_window_resize_animation"
+        xmlns:views="clr-namespace:Wpf_window_resize_animation.Views"
+        xmlns:viewmodels="clr-namespace:Wpf_window_resize_animation.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="Window Resize Animation" SizeToContent="WidthAndHeight">
 
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type viewmodels:PageOneViewModel}">
+            <views:PageOneView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodels:PageTwoViewModel}">
+            <views:PageTwoView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodels:PageThreeViewModel}">
+            <views:PageThreeView />
+        </DataTemplate>
+    </Window.Resources>
+    
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Header -->
+            <views:HeaderView Grid.Row="0" Grid.Column="0" DataContext="{Binding}" />
+
+            <!-- Body -->
+            <ContentControl 
+                    Grid.Row="1" Grid.Column="0" 
+                    Content="{Binding NavService.LoadedViewModel}" />
+        </Grid>
     </Grid>
 </Window>

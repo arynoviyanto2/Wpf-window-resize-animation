@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using Wpf_window_resize_animation.ViewModels;
 
 namespace Wpf_window_resize_animation
 {
@@ -13,5 +14,15 @@ namespace Wpf_window_resize_animation
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            (new MainWindow
+            {
+                DataContext = new MainWindowViewModel()
+            }
+            ).Show();
+
+            base.OnStartup(e);
+        }
     }
 }
